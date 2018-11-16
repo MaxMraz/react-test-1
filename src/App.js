@@ -1,25 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Nav from './components/Nav'
+import Content1 from './components/Content1'
+import Content2 from './components/Content2'
 import './App.css';
 
 class App extends Component {
+  constructor(){
+    super()
+    this.state = {
+      view: ''
+    }
+  }
+
+  changeView = (view) => {
+    this.setState({view})
+  }
+
   render() {
+
+    const view = this.state.view
+    let content
+    if (view === 'view1'){
+      content = <Content1 />
+    } else if (view === 'view2'){
+      content = <Content2 />
+    }
+
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <header>Header</header>
+        <Nav changeView = {this.changeView} />
+        {content}
       </div>
     );
   }
